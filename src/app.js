@@ -68,11 +68,11 @@ app.get("/weather", (req, res) => {
           error: err,
         });
       }
-      const { weather_descriptions, temperature, feelslike } = result.current;
       return res.send({
-        forecast: `${weather_descriptions[0]}. It is currently ${temperature} degrees out. It feels like ${feelslike} degrees out in ${location}.`,
+        forecast: result.forecast,
         location,
         address: req.query.address,
+        weather_icon: result.weather_icon,
       });
     });
   });

@@ -15,7 +15,14 @@ function getForecast(lat, lng, callback) {
       callback(body.error.info, undefined);
       return;
     }
-    callback(undefined, body);
+    const { weather_descriptions, temperature, feelslike, humidity } =
+      body.current;
+    const forecast = `${weather_descriptions[0]}. It is currently ${temperature} degrees out. It feels like ${feelslike} degrees out. The humidity is ${humidity}%`;
+    const result = {
+      forecast,
+      weather_icon: body.current.weather_icons[0],
+    };
+    callback(undefined, result);
   });
 }
 
