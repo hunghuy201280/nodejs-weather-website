@@ -56,3 +56,6 @@ button {
   text-decoration: none;
   color: blue;
 }
+.row {
+  display: grid;
+}

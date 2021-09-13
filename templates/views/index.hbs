@@ -9,6 +9,7 @@
   <link rel="icon" href="/img/weather.png">
 </head>
 
+
 <body>
   <div class="main-content">
     {{>header }}
@@ -16,11 +17,25 @@
 
     </p>
     <form>
-      <input type="text" placeholder="Type your address here!" id="inputAddress"/>
+      <input type="text" placeholder="Type your address here!" id="inputAddress" />
       <button id="searchButton">Search</button>
     </form>
-    <p id="title"></p>
-    <p id="result"></p>
+    <h3>or</h3>
+    <div class="row">
+      <div>
+        <p>Click this button</p>
+      </div>
+      <div
+       class="item2">
+        <button id="getWeather">Get Weather</button>
+      </div>
+  
+    </div>
+    <div>
+      <p id="title"></p>
+      <p id="result"></p>
+    </div>
+
 
     <img id="weather_icon_img">
 

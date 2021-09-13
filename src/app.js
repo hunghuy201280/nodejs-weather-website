@@ -16,7 +16,7 @@ app.set("view engine", "hbs");
 app.set("views", viewsPath);
 hbs.registerPartials(partialsPath);
 
-//setup stadic directory to serve
+//setup static directory to serve
 app.use(express.static(publicDir));
 
 app.get("/", (req, res) => {
@@ -49,11 +49,26 @@ app.get("/help/*", (req, res) => {
   });
 });
 
-app.get("/weather", (req, res) => {
-  if (!req.query.address) {
+app.get("/weather", async (req, res) => {
+  if (!req.query.address && !req.query.lat && !req.query.lng) {
     return res.send({
-      error: "Address must be provided!",
+      error: "Address or position must be provided!",
     });
+  }
+
+  if (req.query.lat && req.query.lng) {
+    forecast.getForecast(req.query.lat, req.query.lng, (err, result) => {
+      if (err) {
+        return res.send({
+          error: err,
+        });
+      }
+      return res.send({
+        forecast: result.forecast,
+        weather_icon: result.weather_icon,
+      });
+    });
+    return;
   }
 
   geocode.geocode(req.query.address, (err, { lat, lng, location } = {}) => {
